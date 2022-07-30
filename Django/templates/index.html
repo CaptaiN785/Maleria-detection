@@ -1,0 +1,188 @@
+
+<!-- 
+
+    Author : Mukesh Kumar Thakur
+    github : CaptaiN785
+
+ -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maleria Detection</title>
+
+    <link rel="stylesheet" href={% static 'style.css' %} class="css">
+</head>
+<body>
+    
+    
+    
+    <section id = "home" >
+        <nav>
+            <a href = "" class = "logo">Maleria Detection</a>
+        </nav>
+
+        <form class = "form" method="post" action="" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <h1>Check <em style="font-weight: bold;">Maleria</em> using cell image</h1>
+            <hr>
+
+            <div class="image-div">
+                <img src = {% static 'parasite.jpg' %}  id = "image">
+                <input type="file" name = "uploaded_image" id = "uploaded_image" onchange="previewImage()" 
+                style="display: none;" accept="image/png, image/jpeg, image/jpg">
+                <label for="uploaded_image">Upload image</label>
+            </div>
+
+            <hr>
+            <div class="result">
+                <p class = "info">To test model download the <a href = "#footer">resources</a></p>
+                <button type = "submit" name = "check" id = "check" onclick="return can_submit()">Check</button>
+                {% if result %}
+                    <div class = "res">
+                        {{ result }}
+                    </div>
+                {% endif %}
+                
+            </div>
+            
+        </form>
+
+    </section>
+
+    <section id = "overview">
+        
+        <h1>
+            Overview
+        </h1>
+
+        <div class="cells">
+            <div class="parasite">
+                <h2>Parasite cells</h2>
+                
+                <div class="cell-block">
+                    <img src = {% static 'Dataset/Train/Parasite/1.png' %}  class = "cell-image">
+                    <img src = {% static 'Dataset/Train/Parasite/2.png' %}  class = "cell-image">
+                    <img src = {% static 'Dataset/Train/Parasite/3.png' %}  class = "cell-image">
+                </div>
+                
+            </div>
+            <div class="uninfected">
+                <h2>Uninfected cells</h2>
+                
+                <div class="cell-block">
+                    <img src = {% static 'Dataset/Train/Uninfected/1.png' %}  class = "cell-image">
+                    <img src = {% static 'Dataset/Train/Uninfected/2.png' %}  class = "cell-image">
+                    <img src = {% static 'Dataset/Train/Uninfected/3.png' %}  class = "cell-image">
+                </div>
+                
+            </div>
+        </div>
+
+    </section>
+
+    <section id = "model-summary">
+        <h2>
+            Model summary
+        </h2>
+        <div class="summary">
+<pre>
+_________________________________________________________________
+Layer (type)                Output Shape              Param #   
+=================================================================
+conv2d_20 (Conv2D)          (None, 48, 48, 64)        4864      
+                                                                
+conv2d_21 (Conv2D)          (None, 48, 48, 64)        102464    
+                                                                
+batch_normalization_6 (Batc  (None, 48, 48, 64)       256       
+hNormalization)                                                 
+                                                                
+max_pooling2d_6 (MaxPooling  (None, 24, 24, 64)       0         
+2D)                                                             
+                                                                
+dropout_6 (Dropout)         (None, 24, 24, 64)        0         
+                                                                
+conv2d_22 (Conv2D)          (None, 24, 24, 128)       73856     
+                                                                
+conv2d_23 (Conv2D)          (None, 24, 24, 128)       147584    
+                                                                
+conv2d_24 (Conv2D)          (None, 24, 24, 128)       147584    
+                                                                
+batch_normalization_7 (Batc  (None, 24, 24, 128)      512       
+hNormalization)                                                 
+                                                                
+max_pooling2d_7 (MaxPooling  (None, 12, 12, 128)      0         
+2D)                                                             
+                                                                
+dropout_7 (Dropout)         (None, 12, 12, 128)       0         
+                                                                
+conv2d_25 (Conv2D)          (None, 12, 12, 256)       295168    
+                                                                
+conv2d_26 (Conv2D)          (None, 12, 12, 256)       590080    
+                                                                
+conv2d_27 (Conv2D)          (None, 12, 12, 256)       590080    
+                                                                
+conv2d_28 (Conv2D)          (None, 12, 12, 256)       590080    
+                                                                
+conv2d_29 (Conv2D)          (None, 12, 12, 256)       590080    
+                                                                
+batch_normalization_8 (Batc  (None, 12, 12, 256)      1024      
+hNormalization)                                                 
+                                                                
+max_pooling2d_8 (MaxPooling  (None, 6, 6, 256)        0         
+2D)                                                             
+                                                                
+flatten_2 (Flatten)         (None, 9216)              0         
+                                                                
+dropout_8 (Dropout)         (None, 9216)              0         
+                                                                
+dense_4 (Dense)             (None, 512)               4719104   
+                                                                
+dense_5 (Dense)             (None, 1)                 513       
+                                                                
+=================================================================
+Total params: 7,853,249
+Trainable params: 7,852,353
+Non-trainable params: 896
+_________________________________________________________________
+</pre>
+        </div>
+    </section>
+
+
+    <footer id = "footer">
+        <p>Made by <a href = "https://github.com/CaptaiN785" target="_blank">Mukesh Kumar Thakur</a></p>
+        <p>Get <a href = "https://github.com/CaptaiN785/Maleria-detection/" target="_blank">resources</a></p>
+    </footer>
+
+
+
+    <script>
+        var uploaded = false;
+        function previewImage(){
+            var file = document.getElementById("uploaded_image").files;
+            if(file.length>0){
+                var fileReader = new FileReader();
+                fileReader.onload = function(event){
+                    document.getElementById("image").setAttribute("src", event.target.result);
+                };
+                fileReader.readAsDataURL(file[0]);
+            }
+            uploaded = true;
+        }
+        function can_submit(){
+            if(uploaded == false){
+                alert("Please upload a image.");
+            }
+            return uploaded;
+        }
+    </script>
+
+</body>
+</html>
