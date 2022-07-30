@@ -1,1 +1,4 @@
-
+Django/media/*
+Django/home/__pycache__/*
+Django/home/migrations/__pycache__/*
+DJango/MaleriaDetection/__pycache__/*
