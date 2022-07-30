@@ -2,6 +2,8 @@
 
 ***Simulation link: https://maleria.herokuapp.com/***
 
+> To test the model <a href= "https://github.com/CaptaiN785/Maleria-detection/raw/main/Dataset.zip" target = "_blank">download</a> cell images.
+
 ### Overview
 This project aims to classify the maleria desiese based on the cell image. There are two types of cell image used here
 one is <code>Parasite</code> and another is non parasite ie. <code>Uninfected</code>. The model is trained using the 
