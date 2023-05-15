@@ -13,14 +13,15 @@ st.set_page_config(
     page_title="Malaria Detection",
     page_icon="💾",
     layout="wide",
+    
 )
 ## Title bar
-title = st.title("Malaria Detection[🔗](https://github.com/CaptaiN785/Maleria-detection)")
-images = iter(os.listdir("images"))
+title = st.title(":blue[[Malaria Detection](https://github.com/CaptaiN785/Maleria-detection)]",  )
 
+images = iter(os.listdir("images"))
 for col in st.columns(4, gap="small"):
     img_name = next(images)
-    col.image(os.path.join("images", img_name), width=250)
+    col.image(os.path.join("images", img_name), width=200)
     img_class = str(img_name).replace("1", "").replace("2", "")
     img_class = img_class[: img_class.rfind(".")]
     col.text(img_class)

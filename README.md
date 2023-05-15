@@ -1,6 +1,6 @@
 # Maleria detection
 
-***Simulation link: https://maleria.herokuapp.com/***
+***Simulation link: https://captain785-maleria-detection-streamlit-app-9sierp.streamlit.app/***
 
 > To test the model <a href= "https://github.com/CaptaiN785/Maleria-detection/raw/main/Dataset.zip" target = "_blank">download</a> cell images.
 
@@ -72,28 +72,6 @@ Non-trainable params: 896
 _________________________________________________________________
 </code></pre>
 
-### Folder arrangement
-<pre><code>
-├───home
-│   ├───migrations
-│   │   └───__pycache__
-│   ├───model.hd5
-│   │   ├───assets
-│   │   └───variables
-│   └───__pycache__
-├───MaleriaDetection
-│   └───__pycache__
-├───media
-├───static
-│   └───Dataset
-│       ├───Test
-│       │   ├───Parasite
-│       │   └───Uninfected
-│       └───Train
-│           ├───Parasite
-│           └───Uninfected
-├───staticfiles
-└───templates
-</code></pre>
+
 
 Thank you
