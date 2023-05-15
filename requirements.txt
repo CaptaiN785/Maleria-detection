@@ -47,5 +47,4 @@ Werkzeug==2.2.1
 whitenoise==6.2.0
 wrapt==1.14.1
 streamlit
-zipfile
 os
