@@ -1,6 +1,6 @@
 # Maleria detection
 
-***Simulation link: https://captain785-maleria-detection-streamlit-app-9sierp.streamlit.app/***
+***Simulation link: https://malariadetection.streamlit.app/***
 
 > To test the model <a href= "https://github.com/CaptaiN785/Maleria-detection/raw/main/Dataset.zip" target = "_blank">download</a> cell images.
 
